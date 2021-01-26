@@ -1,0 +1,89 @@
+package com.example.jokenp;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Switch;
+import android.widget.TextView;
+
+import java.util.Random;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+    public void selecionadoPedra(View view) {
+        this.opcaoSelecionada("pedra");
+
+
+    }
+
+    public void selecionadoPapel(View view) {
+        this.opcaoSelecionada("papel");
+
+
+    }
+
+    public void selecionadoTesoura(View view) {
+        this.opcaoSelecionada("tesoura");
+
+
+    }
+
+    public void opcaoSelecionada(String opcaoSelecionada) {
+        System.out.println(opcaoSelecionada);
+
+        ImageView imagemResultado = findViewById(R.id.imagemResultado);
+        TextView  textodoresultado = findViewById(R.id.textodoresultado);
+
+        int numero = new Random().nextInt(3);
+
+        String[] opcoes = {"pedra", "papel", "tesoura"};
+
+        String opcaoapp = opcoes[numero];
+
+
+        switch(opcaoapp) {
+
+            case "pedra":
+                imagemResultado.setImageResource(R.drawable.pedra);
+                break;
+
+            case "papel":
+                imagemResultado.setImageResource(R.drawable.papel);
+                break;
+
+            case "tesoura":
+                imagemResultado.setImageResource(R.drawable.tesoura);
+                break;
+
+        } ;
+
+        if (
+                (opcaoapp == "tesoura" && opcaoSelecionada == "papel") ||
+                        (opcaoapp == "papel" && opcaoSelecionada == "pedra") ||
+                        (opcaoapp == "pedra" && opcaoSelecionada == "tesoura")
+        )
+        { textodoresultado.setText ("You lose :("); }
+
+        else if (
+                (opcaoSelecionada == "tesoura" && opcaoapp == "papel") ||
+                        (opcaoSelecionada == "papel" && opcaoapp == "pedra") ||
+                        (opcaoSelecionada == "pedra" && opcaoapp == "tesoura")
+        )
+        { textodoresultado.setText ("You win :)"); }
+
+
+        else {
+
+            textodoresultado.setText ("We draw :)");
+        }
+
+    }
+}
